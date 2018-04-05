@@ -103,7 +103,7 @@ export default function writeFile(globalRef, pattern, file) {
                         const previousHash = loaderUtils.getHashDigest(previousContent);
 
                         proceedWithWrite(previousHash);
-                    }).catch(error => {
+                    }).catch(() => {
                         proceedWithWrite();
                     });
                 }
