@@ -268,9 +268,9 @@ and so on...
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
 |[`debug`](#debug)|`{String}`|**`'warning'`**|[Debug Options](#debug)|
-|[`ignore`](#ignore)|`{Array}`|`[]`|Array of globs to ignore (applied to `from`)|
-|[`context`](#context)|`{String}`|`compiler.options.context`|A path that determines how to interpret the `from` path, shared for all patterns|
-|[`copyUnmodified`](#copyUnmodified)|`{Boolean}`|`false`|Copies files, regardless of modification when using watch or `webpack-dev-server`. All files are copied on first build, regardless of this option|
+|[`ignore`](#ignore-1)|`{Array}`|`[]`|Array of globs to ignore (applied to `from`)|
+|[`context`](#context-1)|`{String}`|`compiler.options.context`|A path that determines how to interpret the `from` path, shared for all patterns|
+|[`copyUnmodified`](#copyunmodified)|`{String\|Boolean}`|`false`|Copies files, regardless of modification when using watch or `webpack-dev-server`. All files are copied on first build, regardless of this option. You can also set this to ‘never’. See below|
 
 ### `debug`
 
@@ -342,17 +342,19 @@ and so on...
 
 ### `copyUnmodified`
 
-> ℹ️ By default, we only copy **modified** files during a `webpack --watch` or `webpack-dev-server` build. Setting this option to `true` will copy all files.
+> ℹ️ By default, we only copy **modified** files during a `webpack --watch` or `webpack-dev-server` build. Setting this option to `true` will copy all files. If set to 'never',  the default behavior is followed but it also includes only copying files modified since the last time webpack was run. This relies on file hashes, as opposed to modification times, to compare files.
+
 
 **webpack.config.js**
 ```js
 [
   new CopyWebpackPlugin(
     [ ...patterns ],
-    { copyUnmodified: true }
+    { copyUnmodified: true | false | 'never' }
   )
 ]
 ```
+
 
 <h2 align="center">Maintainers</h2>
 
